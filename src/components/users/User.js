@@ -5,6 +5,7 @@ import Spinner from "../layout/Spinner";
 class User extends Component {
   componentDidMount() {
     this.props.getUser(this.props.match.params.username);
+    // this.props.getUserRepos(this.props.match.params.username);
   }
   render() {
     const {
