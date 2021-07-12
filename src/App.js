@@ -9,7 +9,7 @@ import About from "./components/pages/About";
 import User from "./components/users/User";
 
 class App extends Component {
-  state = { users: [], user: {}, loading: false };
+  state = { users: [], user: {}, repos: [], loading: false };
   // async componentDidMount() {
   //   this.setState({ loading: true });
 
@@ -40,11 +40,11 @@ class App extends Component {
     const res = await axios.get(
       `https://api.github.com/users/${username}/repos?per_page=5&sort=created:asc&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET}`
     );
-    this.setState({ user: res.data, loading: false });
+    this.setState({ repos: res.data, loading: false });
   };
 
   render() {
-    const { users, user, loading } = this.state;
+    const { users, user, repos, loading } = this.state;
     return (
       <div className="App">
         <BrowserRouter>
@@ -74,6 +74,7 @@ class App extends Component {
                     {...props}
                     getUser={this.getUser}
                     getUserRepos={this.getUserRepos}
+                    repos={repos}
                     user={user}
                     loading={loading}
                   />
